@@ -1,0 +1,606 @@
+/* Estilo Base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Chat Call Container */
+#chat-call {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 360px;
+    z-index: 99999; /* Máximo z-index para garantir sobreposição */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    will-change: transform, box-shadow;
+}
+
+#chat-call:hover {
+    transform: scale(1.05);
+}
+
+#chat-call:focus {
+    outline: 3px solid #0042DA;
+    outline-offset: 3px;
+}
+
+/* Chat Bubble */
+.chat-bubble {
+    max-width: 320px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 2px solid #B30400;
+}
+
+.chat-bubble.hover-grow {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.chat-bubble.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #fff;
+    transform: translateY(-50%);
+}
+
+/* Botão de Fechar Bolha */
+.chat-bubble {
+    position: relative; /* Adiciona contexto para posicionamento absoluto */
+}
+
+.chat-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.chat-close-btn:hover {
+    color: #B30400;
+}
+
+/* Typing Dots Animation */
+.typing-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    background-color: #B30400;
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+/* Profile Container */
+.profile-container,
+.profile-container:active,
+.chat-bubble,
+.chat-bubble:focus,
+.chat-bubble:active,
+.chat-close-btn,
+.chat-close-btn:focus,
+.chat-close-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.profile-container {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://s3.typebot.io/public/workspaces/cm1phfshl003t3eii8w05yvqa/typebots/cm2uxrjgl000114hkqz5xo2ta/blocks/phehu4kfk6fvxk7f0qr2h17y?v=1734639126382');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    outline: none;
+}
+
+.profile-container:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Online Status Indicator */
+.profile-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Profile Picture */
+.profile-pic {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Fade In Animations */
+@keyframes fadeInAvatar {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInBubble {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Animações Globais */
+.animated-chat-call {
+    transition: all 0.3s ease;
+}
+
+.animated-chat-call:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.animated-bubble {
+    transition: all 0.3s ease;
+}
+
+.animated-bubble.hover-effect {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+/* Media Queries para Responsividade */
+@media screen and (max-width: 768px) {
+    #chat-call {
+        bottom: 10px;
+        right: 10px;
+        max-width: 300px;
+    }
+
+    .chat-bubble {
+        max-width: 200px;
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .chat-close-btn {
+        width: 25px;
+        height: 25px;
+        top: -10px;
+        left: -10px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #chat-call {
+        bottom: 5px;
+        right: 5px;
+        max-width: 250px;
+    }
+
+    .chat-bubble {
+        max-width: 180px;
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .chat-close-btn {
+        width: 20px;
+        height: 20px;
+        top: -8px;
+        left: -8px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    #chat-call {
+        bottom: 10px;
+        right: 10px;
+        max-width: 300px;
+    }
+
+    .chat-bubble {
+        max-width: 180px;
+        font-size: 14px;
+    }
+}
+
+/* Estilos para Contagem Regressiva */
+.countdown-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.countdown-label {
+    color: #B30400;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+.countdown-timer span {
+    background-color: #f0f0f0;
+    padding: 3px 6px;
+    border-radius: 4px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.urgency-text {
+    color: #B30400;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+    animation: pulse 1.5s infinite;
+}
+
+/* Efeitos de Urgência */
+.urgent-promo {
+    border: 2px solid #B30400;
+    box-shadow: 0 0 15px rgba(179, 4, 0, 0.3);
+    animation: urgentPulse 1s infinite alternate;
+}
+
+@keyframes urgentPulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+/* Animação de Destaque */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.promo-message {
+    text-align: center;
+}
+
+/* Estilos para Captação de Leads */
+.lead-capture-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 2px solid #E0E0E0;
+    transition: all 0.3s ease;
+}
+
+.lead-capture-message:hover {
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #B30400;
+}
+
+.lead-capture-message h3 {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.lead-capture-message p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.product-image-container {
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border: 2px solid #E0E0E0;
+}
+
+.product-image-container:hover {
+    transform: scale(1.05);
+    border-color: #B30400;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cta-button {
+    background-color: #B30400;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+}
+
+.cta-button:hover {
+    background-color: #8C0300;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-color: #ffffff;
+}
+
+.urgency-badge {
+    background-color: #FFC107;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: pulse 1.5s infinite;
+}
+
+.view-counter {
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+/* Animação de Pulse */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Animações de Atenção */
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+.avatar-highlight {
+    box-shadow: 0 0 0 4px rgba(179, 4, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hover-grow {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Efeitos de Hover */
+#chat-call:hover .chat-bubble {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+.initial-message,
+.dynamic-message {
+    position: relative;
+    overflow: hidden;
+}
+
+.initial-message::before,
+.dynamic-message::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(-45deg);
+    pointer-events: none;
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: rotate(-45deg) translateX(-100%); }
+    100% { transform: rotate(-45deg) translateX(100%); }
+}
+
+/* Estilos para Container de Preços */
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.price-original {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.price-promo {
+    color: #B30400;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.price-installment {
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.price-discount {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}
+
+/* Efeitos de Aparição para Imagens */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.product-image-container {
+    animation: zoomIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    transform-origin: center center;
+}
+
+.product-image {
+    transition: all 0.3s ease;
+}
+
+.product-image:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
